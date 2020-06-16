@@ -16,6 +16,7 @@ public class Check_Login {
 			String course = loginbean.getCourse();
 			Connection con = ConnectionProvider.provideConnection();
 			String query = "select * from " + course + " where uname=?";
+                        System.out.println(query);
 			PreparedStatement st = con.prepareStatement(query);
 			st.setString(1, uname);
 			ResultSet rs = st.executeQuery();
