@@ -32,6 +32,7 @@ public class Main_FeeStatusServlet extends HttpServlet {
 			Connection con = DriverManager.getConnection(url, user, passw);
 			String qry2 = "insert into fees_info(uname,fname,lname,annual_fee,fine,exam_fees,fest_fees) values('NONE','"+fname+"','"+lname+"','" + fs
 					+ "','NONE','NONE','NONE')";
+                        System.out.println(qry2);
 			Statement st1 = con.createStatement();
 			int c=st1.executeUpdate(qry2);
 			if(c==1)
