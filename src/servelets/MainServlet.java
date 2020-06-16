@@ -36,6 +36,7 @@ public class MainServlet extends HttpServlet {
 		String zip = request.getParameter("zip");
 		String stream = request.getParameter("stream");
 		String course = request.getParameter("course");
+                System.out.println(fname+" "+lname);
 		try {
 			String url = "jdbc:mysql://localhost:3306/college"; // URL OF DATABASE
 			String user = "root"; // USERNAME OF MYSQL (BY DEFAULT : ROOT)
