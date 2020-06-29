@@ -20,7 +20,7 @@ body {
 }
 </style>
 <meta charset="ISO-8859-1">
-<title>Error 404 not found</title>
+<title>ERROR 404 NOT FOUND</title>
 </head>
 <body>
 	<img src="photos/error.jpg">
@@ -28,7 +28,7 @@ body {
 	<br><br><br>
 	<h1 style="text-align: center;color:rgb(16, 27, 46);">ERROR 404 NOT FOUND :(</h1>
 	<form action="Home.jsp">
-		<input type="submit" value="Go Back To Main Page">
+		<input type="submit" value="Go Back To Home Page">
 	</form>
 </body>
 </html>
