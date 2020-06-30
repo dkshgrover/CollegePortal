@@ -9,7 +9,6 @@ import LoginBean.LoginBeanT;
 public class Check_LoginT {
 	public boolean checkloginT(LoginBeanT loginbeanT) throws Exception {
 		try {
-			// response.setHeader("Cache-control", "no-cache,no-store,must-revalidate");
 			String email = loginbeanT.getEmail();
 			String pass = loginbeanT.getPass();
 			Connection con = ConnectionProvider.provideConnection();
