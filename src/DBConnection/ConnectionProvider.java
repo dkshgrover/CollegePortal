@@ -8,6 +8,7 @@ public class ConnectionProvider {
 		String passw = "DakshGrover6497"; // PASSWORD OF DATABASE
 		Class.forName("com.mysql.jdbc.Driver"); // LOAD AND REGISTERING THE DRIVER
 		Connection con = DriverManager.getConnection(url, user, passw);
+		System.out.println(con);   // IT WILL CHECK WHETHER CONNECTION HAS ESTABLISHED OR NOT
 		return con;
 	}
 }
