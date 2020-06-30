@@ -9,7 +9,6 @@ import LoginBean.LoginBeanAdmin;
 public class Check_LoginAdmin {
 	public boolean checkloginAdmin(LoginBeanAdmin loginbeanAdmin) throws Exception {
 		try {
-			// response.setHeader("Cache-control", "no-cache,no-store,must-revalidate");
 			String email = loginbeanAdmin.getEmail();
 			String pass = loginbeanAdmin.getPass();
 			Connection con = ConnectionProvider.provideConnection();
