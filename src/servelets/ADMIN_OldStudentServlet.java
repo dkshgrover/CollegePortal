@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBConnection.ConnectionProvider;
+
 @WebServlet("/ADMIN_OldStudentServlet")
 public class ADMIN_OldStudentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -23,9 +25,7 @@ public class ADMIN_OldStudentServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String choice = request.getParameter("course");
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/college", "root",
-					"DakshGrover6497");
+			Connection con = ConnectionProvider.provideConnection();
 			String qry = "Select First_Name,Last_Name,stream,uname,pass from " + choice + " where uname is not null;";
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(qry);

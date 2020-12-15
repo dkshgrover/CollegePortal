@@ -10,7 +10,6 @@ public class STUDENT_checkEmail {
 	{	
 		try
 		{
-			Class.forName("com.mysql.jdbc.Driver");
 			Connection con=ConnectionProvider.provideConnection();
 			Statement st=con.createStatement();
 			String qry="Select uname from "+course+" where uname='"+uname+"'";

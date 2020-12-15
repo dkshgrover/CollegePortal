@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import AuthenticatingUser.BCrypt;
+import DBConnection.ConnectionProvider;
 
 @WebServlet("/ADMIN_teacherServlet")
 public class ADMIN_teacherServlet extends HttpServlet {
@@ -25,11 +26,8 @@ public class ADMIN_teacherServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String pass = request.getParameter("pass");
-		pass = BCrypt.hashpw(pass, BCrypt.gensalt(12));
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/college", "root",
-					"DakshGrover6497");
+			Connection con = ConnectionProvider.provideConnection();
 			String qry = "update teachers1 set email_id=? , pass=? where Name=?";
 			PreparedStatement st = con.prepareStatement(qry);
 			st.setString(1, email);

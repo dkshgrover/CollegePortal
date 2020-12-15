@@ -1,10 +1,9 @@
+<%@page import="DBConnection.ConnectionProvider"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.util.*"%>
 <%@page import="servelets.ADMIN_checkEmail"%>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -71,8 +70,7 @@ table th td {
 	if (!bool) {
 		response.sendRedirect("ADMIN_login_portalAdmin.jsp");
 	}
-	Class.forName("com.mysql.jdbc.Driver");
-	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/college", "root", "DakshGrover6497");
+	Connection con = ConnectionProvider.provideConnection();
 	Statement st = con.createStatement();
 	String qry2 = "select * from employees";
 	ResultSet rs = st.executeQuery(qry2);

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import AuthenticatingUser.BCrypt;
+import DBConnection.ConnectionProvider;
 
 
 @WebServlet("/ADMIN_changeservlet")
@@ -28,14 +29,11 @@ public class ADMIN_changeservlet extends HttpServlet {
 		String uname = request.getParameter("uname");
 		session.setAttribute("uname", uname);
 		String pass = request.getParameter("pass");
-		pass=BCrypt.hashpw(pass, BCrypt.gensalt(12));
 		String fname = request.getParameter("fname");
 		String lname = request.getParameter("lname");
 		String course = (String) session.getAttribute("course");
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/college", "root",
-					"DakshGrover6497");
+			Connection con = ConnectionProvider.provideConnection();
 			String qry = "update " + course + " set uname='" + uname + "',pass='" + pass
 					+ "' where uname='NONE' and First_Name='" + fname + "' and Last_Name='" + lname +"'";
 			Statement st = con.createStatement();

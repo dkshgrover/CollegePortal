@@ -1,3 +1,4 @@
+<%@page import="DBConnection.ConnectionProvider"%>
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.*"%>
@@ -68,8 +69,7 @@ table th td {
 	if (!bool) {
 		response.sendRedirect("PR_login_portalPR.jsp");
 	}
-	Class.forName("com.mysql.jdbc.Driver");
-	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/college", "root", "DakshGrover6497");
+	Connection con = ConnectionProvider.provideConnection();
 	Statement st = con.createStatement();
 	String qry2 = "select * from main_data";
 	ResultSet rs = st.executeQuery(qry2);

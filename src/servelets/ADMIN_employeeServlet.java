@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBConnection.ConnectionProvider;
+
 
 @WebServlet("/ADMIN_employeeServlet")
 public class ADMIN_employeeServlet extends HttpServlet {
@@ -44,8 +46,7 @@ public class ADMIN_employeeServlet extends HttpServlet {
 		}
 		try
 		{
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/college", "root", "DakshGrover6497");
+			Connection con = ConnectionProvider.provideConnection();
 			String qry="insert into employees(Name,Post) values(?,?)";
 			PreparedStatement st=con.prepareStatement(qry);
 			st.setString(1, name);

@@ -34,12 +34,10 @@ public class ADMIN_changepassservlet extends HttpServlet {
 		}
 		try {
 			Connection con = ConnectionProvider.provideConnection();
-			String qry = "SELECT * from administrator where email='" + email + "'";
+			String qry = "SELECT * from administrator where email='" + email + "' and pass='"+pass+"'";
 			Statement st = con.createStatement();
 			ResultSet rs1 = st.executeQuery(qry);
-			if (rs1.next()) {
-				String hashed = rs1.getString(2);
-				if (BCrypt.checkpw(pass, hashed)) {
+				if (rs1.next()) {
 					newpass = BCrypt.hashpw(newpass, BCrypt.gensalt(12));
 					String query = "update administrator set pass='" + newpass + "' where email='" + email + "'";
 					st.executeUpdate(query);
@@ -49,7 +47,6 @@ public class ADMIN_changepassservlet extends HttpServlet {
 					request.setAttribute("errm", "Wrong Password Filled**");
 					request.getRequestDispatcher("ADMIN_changepass.jsp").forward(request, response);
 				}
-			}
 		} catch (Exception e) {
 
 		}

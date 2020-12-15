@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBConnection.ConnectionProvider;
+
 @WebServlet("/PR_teacherPayServlet")
 public class PR_teacherPayServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -23,9 +25,7 @@ public class PR_teacherPayServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String status = request.getParameter("status");
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/college", "root",
-					"DakshGrover6497");
+			Connection con = ConnectionProvider.provideConnection();
 			String qry = "update teachers1 set status='" + status + "' where Name='" + name + "'";
 			Statement st = con.createStatement();
 			int count = st.executeUpdate(qry);

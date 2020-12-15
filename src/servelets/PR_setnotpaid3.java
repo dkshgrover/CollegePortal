@@ -12,17 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DBConnection.ConnectionProvider;
+
 @WebServlet("/PR_setnotpaid3")
 public class PR_setnotpaid3 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/college", "root",
-					"DakshGrover6497");
+			Connection con = ConnectionProvider.provideConnection();
 			String qry = "update fees_info set fest_fees='NOT PAID'";
 			Statement st = con.createStatement();
-			int count = st.executeUpdate(qry);
+			st.executeUpdate(qry);
 			response.sendRedirect("PR_studentInfo.jsp");
 		} catch (Exception e) {
 

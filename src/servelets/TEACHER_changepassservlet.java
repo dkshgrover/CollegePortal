@@ -38,10 +38,7 @@ public class TEACHER_changepassservlet extends HttpServlet {
 			String qry = "SELECT * from teachers1 where email_id='" + email + "'";
 			Statement st = con.createStatement();
 			ResultSet rs1 = st.executeQuery(qry);
-			if (rs1.next()) {
-				String hashed = rs1.getString(5);
-				if (BCrypt.checkpw(pass, hashed)) {
-					newpass = BCrypt.hashpw(newpass, BCrypt.gensalt(12));
+				if (rs1.next()) {
 					String query = "update teachers1 set pass='" + newpass + "' where email_id='" + email + "'";
 					st.executeUpdate(query);
 					request.setAttribute("succ", "Passwords Changed :)");
@@ -51,7 +48,6 @@ public class TEACHER_changepassservlet extends HttpServlet {
 					// response.sendRedirect("PR_changepass.jsp");
 					request.getRequestDispatcher("TEACHER_changepass.jsp").forward(request, response);
 				}
-			}
 		} catch (Exception e) {
 
 		}

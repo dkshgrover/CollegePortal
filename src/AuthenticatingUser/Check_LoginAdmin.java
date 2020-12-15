@@ -12,16 +12,13 @@ public class Check_LoginAdmin {
 			String email = loginbeanAdmin.getEmail();
 			String pass = loginbeanAdmin.getPass();
 			Connection con = ConnectionProvider.provideConnection();
-			String query = "select * from administrator where email=?";
+			String query = "select * from administrator where email=? and pass=?";
 			PreparedStatement st = con.prepareStatement(query);
 			st.setString(1, email);
+			st.setString(2, pass);
 			ResultSet rs = st.executeQuery();
 			if (rs.next()) {
-				String hashed=rs.getString(2);
-				if(BCrypt.checkpw(pass, hashed))
-				{
-					return true;
-				}
+				return true;
 			}
 		} catch (Exception e) {
 

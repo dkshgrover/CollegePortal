@@ -1,5 +1,4 @@
 package servelets;
-
 import javax.servlet.http.HttpSession;
 
 import DBConnection.ConnectionProvider;
@@ -10,7 +9,6 @@ public class ADMIN_checkEmail {
 	{	
 		try
 		{
-			Class.forName("com.mysql.jdbc.Driver");
 			Connection con=ConnectionProvider.provideConnection();
 			Statement st=con.createStatement();
 			String qry="Select email from administrator where email='"+email+"'";

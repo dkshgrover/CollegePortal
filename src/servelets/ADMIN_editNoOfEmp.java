@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBConnection.ConnectionProvider;
+
 
 @WebServlet("/ADMIN_editNoOfEmp")
 public class ADMIN_editNoOfEmp extends HttpServlet {
@@ -24,11 +26,7 @@ public class ADMIN_editNoOfEmp extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			String url = "jdbc:mysql://localhost:3306/college"; // URL OF DATABASE
-			String user = "root"; // USERNAME OF MYSQL (BY DEFAULT : ROOT)
-			String passw = "DakshGrover6497"; // PASSWORD OF DATABASE
-			Class.forName("com.mysql.jdbc.Driver"); // LOAD AND REGISTERING THE DRIVER
-			Connection con = DriverManager.getConnection(url, user, passw);
+			Connection con = ConnectionProvider.provideConnection();
 			String qry = "select * from main_data";
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(qry);

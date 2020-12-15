@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DBConnection.ConnectionProvider;
+
 
 @WebServlet("/PR_updateservlet2")
 public class PR_updateservlet2 extends HttpServlet {
@@ -26,9 +28,7 @@ public class PR_updateservlet2 extends HttpServlet {
 		String roll=request.getParameter("roll");
 		String status=request.getParameter("status");
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/college", "root",
-					"DakshGrover6497");
+			Connection con = ConnectionProvider.provideConnection();
 			String qry = "update fees_info set exam_fees='"+status+"' where uname='"+roll+"'";
 			Statement st = con.createStatement();
 			int count = st.executeUpdate(qry);

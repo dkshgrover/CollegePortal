@@ -10,7 +10,6 @@ public class TEACHER_checkEmail {
 	{	
 		try
 		{
-			Class.forName("com.mysql.jdbc.Driver");
 			Connection con=ConnectionProvider.provideConnection();
 			Statement st=con.createStatement();
 			String qry="Select email_id from teachers1 where email_id='"+email+"'";

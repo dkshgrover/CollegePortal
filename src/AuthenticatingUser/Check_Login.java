@@ -14,15 +14,13 @@ public class Check_Login {
 			String pass = loginbean.getPass();
 			String course = loginbean.getCourse();
 			Connection con = ConnectionProvider.provideConnection();
-			String query = "select * from " + course + " where uname=?";
+			String query = "select * from " + course + " where uname=? and pass=?";
 			PreparedStatement st = con.prepareStatement(query);
 			st.setString(1, uname);
+			st.setString(2, pass);
 			ResultSet rs = st.executeQuery();
 			if (rs.next()) {
-				String hashed = rs.getString(14);
-				if (BCrypt.checkpw(pass, hashed)) {
-					return true;
-				}
+				return true;
 			}
 		} catch (Exception e) {
 

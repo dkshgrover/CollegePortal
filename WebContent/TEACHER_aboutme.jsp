@@ -1,3 +1,4 @@
+<%@page import="DBConnection.ConnectionProvider"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.*"%>
@@ -62,11 +63,7 @@ th{
 	<br>
 	<br>
 	<%
-		String url = "jdbc:mysql://localhost:3306/college";
-		String user = "root";
-		String passw = "DakshGrover6497";
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = DriverManager.getConnection(url, user, passw);
+		Connection con  = ConnectionProvider.provideConnection();
 		String query = "select * from teachers1 where email_id='" + session.getAttribute("email") + "'";
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(query);

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBConnection.ConnectionProvider;
+
 @WebServlet("/MainServlet")
 public class MainServlet extends HttpServlet {
 
@@ -36,13 +38,10 @@ public class MainServlet extends HttpServlet {
 		String zip = request.getParameter("zip");
 		String stream = request.getParameter("stream");
 		String course = request.getParameter("course");
-                System.out.println(fname+" "+lname);
+        //System.out.println(fname+" "+lname);
 		try {
-			String url = "jdbc:mysql://localhost:3306/college"; // URL OF DATABASE
-			String user = "root"; // USERNAME OF MYSQL (BY DEFAULT : ROOT)
-			String passw = "DakshGrover6497"; // PASSWORD OF DATABASE
-			Class.forName("com.mysql.jdbc.Driver"); // LOAD AND REGISTERING THE DRIVER
-			Connection con = DriverManager.getConnection(url, user, passw);
+			
+			Connection con = ConnectionProvider.provideConnection();
 			String qry = "insert into " + course
 					+ "(First_Name,Last_Name,Student_Contact,Father_First_Name,Father_Last_Name,Father_Contact,Address,city,state,zipcode,stream,uname,pass) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement st = con.prepareStatement(qry);
@@ -59,7 +58,7 @@ public class MainServlet extends HttpServlet {
 			st.setString(11, stream);
 			st.setString(12, "NONE");
 			st.setString(13, "NONE");
-			int count = st.executeUpdate();
+			st.executeUpdate();
 			RequestDispatcher rd = request.getRequestDispatcher("feestatus.jsp");
 			rd.forward(request, response);
 		} catch (Exception e) {
